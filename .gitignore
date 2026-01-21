@@ -1,0 +1,14 @@
+# Ignore the massive database
+chroma_db/
+chroma_db_snapshot/
+
+# Ignore secrets
+.env
+
+# Ignore python cache and venv
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+my_questions.txt
