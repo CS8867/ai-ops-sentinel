@@ -1,6 +1,6 @@
 # AI Ops Sentinel
 
-**AI Ops Sentinel** is an automated incident response dashboard. It uses Generative AI (RAG) to monitor system health, identify root causes from logs, and generate code fixes for Java applications.
+**AI Ops Sentinel** is an automated incident response dashboard. It uses Generative AI (RAG) to monitor system health, identify root causes from logs, and generate code fixes for Java applications (Currently tested on the spring petclinic repo).
 
 ## Features
 
