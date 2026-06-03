@@ -105,19 +105,22 @@ async def github_action_node(state: GraphState):
     owner = os.getenv("GITHUB_OWNER", "CS8867")
     repo = os.getenv("GITHUB_REPO", "sentinel-python-target")
 
-    async with stdio_client(server_params) as (read, write):
-        async with ClientSession(read, write) as session:
-            await session.initialize()
+    try:
+        async with stdio_client(server_params) as (read, write):
+            async with ClientSession(read, write) as session:
+                await session.initialize()
 
-            result = await session.call_tool("create_or_update_file", {
-                "owner": owner,
-                "repo": repo,
-                "path": state["target_file"],
-                "content": state["generated_fix"],
-                "message": f"AI-SRE: Automated fix for {state['target_file']}",
-                "branch": "fix/ai-remediation"
-            })
-            return {"github_result": str(result)}
+                result = await session.call_tool("create_or_update_file", {
+                    "owner": owner,
+                    "repo": repo,
+                    "path": state["target_file"],
+                    "content": state["generated_fix"],
+                    "message": f"AI-SRE: Automated fix for {state['target_file']}",
+                    "branch": "ai-remediation"
+                })
+                return {"github_result": str(result)}
+    except Exception as e:
+        return {"github_result": f"GitHub push failed: {e}"}
 
 
 # --- 3. BUILD THE GRAPH ---
